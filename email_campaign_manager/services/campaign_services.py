@@ -1,13 +1,18 @@
 import datetime
 from email_campaign_manager.models.campaign_model import Campaign
 from email_campaign_manager.models.subscriber_model import Subscriber
-from email_campaign_manager.services.email_services import send_email
+from email_campaign_manager.services.email_services import send_email, send_bulk_emails
 from django.template.loader import render_to_string
+import logging
+
+logger = logging.getLogger('django')
 
 def run_daily_campaign():
     # Get today's campaigns
     today = datetime.date.today()
     campaigns = Campaign.objects.filter(published_date__date=today)
+
+    logger.info(f"Campaigns for today {campaigns}")
 
     # Get active subscribers
     active_subscribers = Subscriber.objects.filter(is_active=True)
@@ -23,6 +28,6 @@ def run_daily_campaign():
         })
         
         # Send the email
-        send_email(email_list, campaign.subject, html_content)
+        send_bulk_emails(email_list, campaign.subject, html_content)
 
     return {"status_code": 200, "message": "Email sent to all users for all campaigns today"}
