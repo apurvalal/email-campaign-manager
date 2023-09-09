@@ -56,7 +56,7 @@ def run_campaign_by_id(campaign_id):
         - message (str)
     """
     try:
-        campaign = Campaign.objects.get(id=campaign_id)
+        campaign = Campaign.objects.get(campaign_id=campaign_id)
         
         # Get active subscribers
         active_subscribers = Subscriber.objects.filter(is_active=True)
