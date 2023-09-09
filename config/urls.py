@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from email_campaign_manager.controllers.campaign_controller import execute_campaign
+from email_campaign_manager.controllers.campaign_controller import execute_campaign, execute_campaign_by_id
 from email_campaign_manager.controllers.subscriber_controller import add_subscriber, unsubscribe
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('email/send/daily/', execute_campaign),
+    path('email/send/', execute_campaign_by_id),
     path('subscriber/add/', add_subscriber),
     path('subscriber/unsubscribe/', unsubscribe)
 ]

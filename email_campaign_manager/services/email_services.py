@@ -3,6 +3,7 @@ import os
 import logging
 from threading import Thread
 from dotenv import load_dotenv
+from celery import shared_task
 
 logger = logging.getLogger('django')
 load_dotenv()
@@ -28,7 +29,7 @@ def send_email(to_email, subject, html_content):
     except Exception as e:
         logger.error(f"An error occurred while sending the email: {str(e)}")
 
-
+@shared_task(name='send_bulk_emails')
 def send_bulk_emails(email_list, subject, html_content):
     threads = []
     try:

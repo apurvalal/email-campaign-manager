@@ -29,7 +29,7 @@ def run_daily_campaign():
             })
             
             # Send the email
-            send_bulk_emails(email_list, campaign.subject, html_content)
+            send_bulk_emails.apply_async((email_list, campaign.subject, html_content))
 
         return {"status_code": 200, "message": "Email sent to all users for all campaigns today"}
     except Exception as e:
