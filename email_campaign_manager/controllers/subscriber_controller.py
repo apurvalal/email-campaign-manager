@@ -3,6 +3,10 @@ from email_campaign_manager.models.subscriber_model import Subscriber
 import json
 
 def add_subscriber(request):
+    """
+    Add a new subscriber to the email list. 
+    """
+
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
 
@@ -23,6 +27,10 @@ def add_subscriber(request):
         return HttpResponseBadRequest("Invalid request method")
 
 def unsubscribe(request):
+    """
+    Unsubscribe an existing subscriber from the email list.
+    """
+    
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         email = data.get('email')

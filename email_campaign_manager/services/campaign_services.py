@@ -8,6 +8,14 @@ import logging
 logger = logging.getLogger('django')
 
 def run_daily_campaign():
+    """
+    Runs a daily campaign by sending emails to all active subscribers for today's campaigns.
+
+    Returns:
+        - status_code (int)
+        - message (str)
+    """
+
     try:
         # Get today's campaigns
         today = datetime.date.today()
@@ -37,6 +45,16 @@ def run_daily_campaign():
         return {"status_code": 500, "message": f"An error occurred: {str(e)}"}
 
 def run_campaign_by_id(campaign_id):
+    """
+    Runs a campaign by its campaign_id.
+
+    Args:
+        campaign_id (int)
+
+    Returns:
+        - status_code (int)
+        - message (str)
+    """
     try:
         campaign = Campaign.objects.get(id=campaign_id)
         

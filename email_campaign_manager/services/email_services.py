@@ -9,6 +9,17 @@ logger = logging.getLogger('django')
 load_dotenv()
 
 def send_email(to_email, subject, html_content):
+    """
+    Sends an email with the given parameters.
+
+    Args:
+        to_email (str)
+        subject (str)
+        html_content (str)
+
+    Returns:
+        None
+    """
     try:
         smtp_server = "smtp.mailgun.org"
         smtp_port = 587
@@ -31,6 +42,18 @@ def send_email(to_email, subject, html_content):
 
 @shared_task(name='send_bulk_emails')
 def send_bulk_emails(email_list, subject, html_content):
+    """
+    Sends bulk emails to a list of email addresses.
+
+    Args:
+        email_list (list)
+        subject (str)
+        html_content (str)
+
+    Returns:
+        None
+
+    """
     threads = []
     try:
         logger.info(f"Sending bulk emails with subject: {subject}")
